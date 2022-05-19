@@ -34,6 +34,8 @@ function limpiarTablas(tableProcesos, tableGant, tableEsperaProm, tableRespuesta
 
 function completarTablaProcesos(procesos, rafagasCPU, bodyTableProcesos) {
     let procesosText = document.getElementById("procesos").value;
+    procesosText = procesosText.trim();
+    console.log(procesosText)
     let procesosArray = procesosText.split("\n")
 
     procesosArray.forEach((proc) => {
@@ -108,6 +110,8 @@ function completarTablaGant(procesos, gant, bodyTableGant, rafagasCPU) {
                 menorAux.splice(0,1)
             }
 
+            //VERIFICAMOS SI HAY PROCESOS QUE TIENEN EL MISMO TIEMPO DE EJECUCIÓN
+            // PARA ESTE CASO SE APLICA EL METODO "FIFO"
             if (menorAux.length > 1) {
                 let menorAux2 = menorAux[0];
                 for( let index in menorAux) {

@@ -4,126 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SJF</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <style>
-  body {
-    background-color: brown;
-  }
 
-  p{
-    color: #ffffff;
-  }
+    body, html {
+        height: 100%;
+    }
 
+    body {
+        background-color: black;
+    }
+    
+    .boton {
+        height: 50px;
+        width: 250px;
+        font-size: 25px;
+    }
 </style>
 <body>
-    <div class="container">
-      <div class="row mt-5">
-        <div class="col-2">
-          <img src="logoUntelsSinFondo.png" alt="" style="width: 130px">
-        </div>
-        <div class="col-8 text-center text-white mt-5" style="font-size: 40px">
-          Algoritmo SJF
-        </div>
-        <div class="col-12 text-white mt-2">
-          El algoritmo SJF es un algoritmo que se basa atender primero los procesos más cortos, es decir que requieran menos unidades de tiempo o el ciclo de CPU más pequeño (tiempo de ráfaga CPU), en caso haya una igualdad en el tiempo de menor ráfaga se aplicará el algoritmo FCFS (prioriza el primer proceso que llegó).
-        </div>
-      </div>
-      <div class="row mt-5">
-          <form id="form-input">
-            <div class="form-group">
-              <label class="text-white" for="procesos">
-                En el siguiente recuadro ingrese sus procesos, con sus <br> 
-                respectivos tiempos de llegada y su ráfaga de CPU. <br>
-                Ejemplo de entrada: <br>
-                  EXCEL,2,12 <br>
-                  WORD,1,5 <br>
-                  AUTOCAD,4,10 <br>
-                  STEAM,3,4 <br>
-              </label>
-              <textarea class="form-control" id="procesos" rows="6" cols="40" style="background: #495057; color: white;"></textarea>
+    <div class="container" style="height: 100%">
+        <div class="col-12 text-center" style="height: 100%">
+            <div style="color: #ffffff; font-size: 40px;" style="height: 10%">
+                Algoritmo SJF 
             </div>
-            <button type="submit" class="btn btn-dark">Procesar</button>
-          </form>
-      </div>
-      <div class="row mt-5">
-        <div class="col-12 text-center text-white" style="font-size: 25px">
-          Resultados
+            <div class="mt-3" style="height: 50%">
+                <img src="logoUntels.jpg" alt="" style="height: 100%;">
+            </div>
+            <div class="mt-5" style="height: 10%">
+                <a href="sjf.html">
+                    <button class="btn btn-success boton">SJF</button>
+                </a>
+            </div>
         </div>
-        <div class="col-12">
-          <div class="row my-3">
-            <div class="col-6 text-center">
-              <p>Tabla 1. Procesos</p>
-              <table class="table table-bordered table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">Proceso (P)</th>
-                    <th scope="col">Tiempo de llegada (TLL)</th>
-                    <th scope="col">Ráfaga de CPU (RAF)</th>
-                  </tr>
-                </thead>
-                <tbody id="table-procesos-body">
-                </tbody>
-              </table>
-            </div>
-            <div class="col-6"></div>
-          </div>
-          <div class="row my-3">
-            <div class="col-6"></div>
-            <div class="col-6 text-center">
-              <p>Tabla 2. Diagrama de GANT</p>
-              <table class="table table-bordered table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">Proceso (P)</th>
-                    <th scope="col">T.E.</th>
-                  </tr>
-                </thead>
-                <tbody id="table-gant-body">
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="row my-3">
-              <div class="col-6 text-center">
-                <p>Tabla 3. Tiempo de espera promedio</p>
-                <table class="table table-bordered table-dark">
-                  <thead>
-                    <tr>
-                      <th scope="col">T.E.Proc</th>
-                      <th scope="col" colspan="2">T.Eje. - T.Lleg.</th>
-                      <th scope="col">TEP.Proc.</th>
-                    </tr>
-                  </thead>
-                  <tbody id="table-espera-promedio-body">
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-6"></div>
-          </div>
-          <div class="row my-3">
-            <div class="col-6"></div>
-            <div class="col-6 text-center">
-              <p>Tabla 4. Tiempo de respuesta promedio</p>
-              <table class="table table-bordered table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">T.R.Proc</th>
-                    <th scope="col" colspan="2">Raf. + T.Esp.</th>
-                    <th scope="col">T.R.Proc.</th>
-                  </tr>
-                </thead>
-                <tbody id="table-respuesta-promedio-body">
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 </body>
