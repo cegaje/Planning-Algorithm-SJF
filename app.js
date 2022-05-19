@@ -33,11 +33,12 @@ function limpiarTablas(tableProcesos, tableGant, tableEsperaProm, tableRespuesta
 }
 
 function completarTablaProcesos(procesos, rafagasCPU, bodyTableProcesos) {
+    // OBTENEMOS TODOS LOS PROCESOS COMO TEXTO
     let procesosText = document.getElementById("procesos").value;
     procesosText = procesosText.trim();
-    console.log(procesosText)
     let procesosArray = procesosText.split("\n")
 
+    // GUARDAMOS TODOS LOS PROCESOS COMO OBJETO EN EL ARREGLO "PROCESOS"
     procesosArray.forEach((proc) => {
         var procesoArray = proc.split(",");
         procesos.push({
@@ -46,6 +47,7 @@ function completarTablaProcesos(procesos, rafagasCPU, bodyTableProcesos) {
             rafagaCPU : Number(procesoArray[2])
         });
 
+        // PINTAMOS LA TABLA DE PROCESOS
         bodyTableProcesos.innerHTML += `
         <tr>
             <th scope="col">${procesoArray[0]}</th>
@@ -92,6 +94,8 @@ function completarTablaGant(procesos, gant, bodyTableGant, rafagasCPU) {
     //ORDENAMOS LOS PROCESOS SEGUN SU TIEMPO DE EJECUCIÓN
     for( let index in procesos) {
         if (index != procesos.length-1) {
+            
+            
             let menorAux = [{proceso:"prueba",rafagaCPU : rafagasCPU[rafagasCPU.length - 1]}]
             
             for( let index2 in procesos) {
@@ -113,19 +117,18 @@ function completarTablaGant(procesos, gant, bodyTableGant, rafagasCPU) {
             //VERIFICAMOS SI HAY PROCESOS QUE TIENEN EL MISMO TIEMPO DE EJECUCIÓN
             // PARA ESTE CASO SE APLICA EL METODO "FIFO"
             if (menorAux.length > 1) {
-                let menorAux2 = menorAux[0];
+                let menorTLL = menorAux[0];
                 for( let index in menorAux) {
                     if( !gant.includes(menorAux[index]) ) {
-                        if (menorAux[index].tiempoLlegada <= menorAux2.tiempoLlegada) {
-                            menorAux2 = menorAux[index];
+                        if (menorAux[index].tiempoLlegada <= menorTLL.tiempoLlegada) {
+                            menorTLL = menorAux[index];
                         }
                     }
                 }
-                gant.push(menorAux2)
+                gant.push(menorTLL)
             }else {
                 gant.push(menorAux[0])
             }
-            
         }
     }
     
@@ -141,16 +144,14 @@ function completarTablaGant(procesos, gant, bodyTableGant, rafagasCPU) {
         `;
         gant[index].tiempoEspera = tiempoEjecucion;
         tiempoEjecucion += gant[index].rafagaCPU
-
-        if (index == gant.length-1) {
-            bodyTableGant.innerHTML += `
-            <tr>
-                <th scope="col">-</th>
-                <th scope="col">${index==0? 0:tiempoEjecucion}</th>
-            </tr>
-            `;
-        }
     }
+
+    bodyTableGant.innerHTML += `
+    <tr>
+        <th scope="col">-</th>
+        <th scope="col">${tiempoEjecucion}</th>
+    </tr>
+    `;
 }
 
 function completarTablaEsperaPromedio(gant, bodyTableEsperaProm, procesos) {
